@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+
+<style>
+body{
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    height:100vh;
+    background:rgb(255, 206, 255);
+    font-family: system-ui, sans-serif;
+}
+.btn{
+    width:260px;
+    height:64px;
+    background:black;
+    border-radius:999px;
+    position:relative;
+    overflow:hidden;
+    cursor:pointer;
+}
+.text{
+    position:absolute;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    font-weight:600;
+    letter-spacing:1px;
+    color:rgb(255, 206, 255);
+}
+.cart{
+    position:absolute;
+    inset:0;
+    display:flex;
+    justify-content:center;
+    align-items:center;
+    transform:translateX(-130%);
+}
+
+.cart svg{
+    width:40px;
+    fill:#ffffff;
+}
+.ball{
+    position:absolute;
+    left:50%;
+    top:50%;
+    width:9px;
+    height:9px;
+    background:rgb(255, 206, 255);
+    border-radius:50%;
+    transform:translate(-50%,-50%);
+    opacity:0;
+}
+.tick{
+    position:absolute;
+    font-size:20px;
+    font-weight:700;
+    color:#d033ae;
+    opacity:0;
+    transform:scale(0.5);
+}
+
+
+.btn.active .text{
+    animation:textOut .6s forwards ease;
+}
+
+.btn.active .cart{
+    animation:cartFlow 3.6s forwards ease;
+}
+
+.btn.active .ball{
+    animation:ballBounce .8s forwards ease .9s;
+}
+
+.btn.active .cart svg{
+    animation:cartColor .3s forwards ease 1.6s;
+}
+.btn.active .tick{
+    animation:tickShow .3s forwards ease 1.6s;
+}
+
+
+@keyframes textOut{
+    to{transform:translateX(130%);}
+}
+
+@keyframes cartIn{
+    to{transform:translateX(0);}
+}
+@keyframes ballBounce{
+    0%{
+        opacity:0;
+        transform:translate(-50%,0) scale(1);
+    }
+
+    10%{
+        opacity:1;
+    }
+
+    40%{
+        transform:translate(-50%,-30px) scale(1); 
+    }
+
+    65%{
+        transform:translate(-50%,0) scale(1);  
+    }
+
+    85%{
+        transform:translate(-50%,-12px) scale(1.5); 
+    }
+
+    100%{
+        opacity:0;
+        transform:translate(-50%,0) scale(1); 
+    }
+}
+
+
+@keyframes cartColor{
+    from { fill:#ffffff; }
+    to   { fill:rgb(255, 206, 255); }
+}
+@keyframes tickShow{
+    0%{
+        opacity:0;
+        transform:scale(0.5);
+    }
+    100%{
+        opacity:1;
+        transform:scale(1);
+    }
+}
+@keyframes cartFlow{
+    0%{
+        transform:translateX(-130%);
+    }
+    20%{
+        transform:translateX(0); 
+    }
+    70%{
+        transform:translateX(0); 
+    }
+    100%{
+        transform:translateX(130%); 
+    }
+}
+
+
+
+</style>
+</head>
+
+<body>
+
+<div class="btn" id="btn">
+
+    <div class="text">ADD TO CART</div>
+
+    <div class="cart">
+        <svg viewBox="0 0 24 24">
+            <path d="M7 18c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zm10 0c-1.1 0-2 .9-2 2s.9 2 2 2 2-.9 2-2-.9-2-2-2zM7.17 14.75h9.66c.75 0 1.41-.41 1.75-1.03l3.58-6.49a1 1 0 0 0-.87-1.48H5.21L4.27 2H1v2h2l3.6 7.59-1.35 2.44C4.52 14.37 5.48 16 7 16h12v-2H7.42c-.14 0-.25-.11-.25-.25l.05-.25z"/>
+        </svg>
+        <div class="tick">✓</div>
+
+    </div>
+
+    <div class="ball"></div>
+
+</div>
+
+<script>
+const btn = document.getElementById("btn");
+
+btn.addEventListener("click", () => {
+    btn.classList.remove("active");
+    void btn.offsetWidth; 
+    btn.classList.add("active");
+});
+</script>
+
+</body>
+</html>
+
